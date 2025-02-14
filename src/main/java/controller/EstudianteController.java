@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class EstudianteController {
-    public EstudianteDao estudianteDao;
+    private EstudianteDao estudianteDao;
 
     public EstudianteController() {
         Connection conn = DatabaseConection.getConnection();

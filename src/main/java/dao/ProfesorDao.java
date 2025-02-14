@@ -14,7 +14,7 @@ public class ProfesorDao {
     }
 
     public void agregarProfesor(Profesor profesor) throws SQLException {
-        String query = "INSERT INTO profesor (nombre, identificacion, email, departamento, estado) VALUES (?,?,?,?,?)";
+        String query = "INSERT INTO profesorHBE (nombre, identificacion, email, departamento, estado) VALUES (?,?,?,?,?)";
 
         try (PreparedStatement setDePropiedades = con.prepareStatement(query)) {
             setDePropiedades.setString(1, profesor.getNombre());
@@ -28,7 +28,7 @@ public class ProfesorDao {
     }
 
     public void modificarProfesor(Profesor profesor) throws SQLException {
-        String query = "UPDATE profesor SET nombre = ?, identificacion = ?, email = ?, departamento = ?, estado = ? WHERE id = ?";
+        String query = "UPDATE profesorHBE SET nombre = ?, identificacion = ?, email = ?, departamento = ?, estado = ? WHERE id = ?";
         try (PreparedStatement setDePropiedades = con.prepareStatement(query)) {
             setDePropiedades.setString(1, profesor.getNombre());
             setDePropiedades.setString(2, profesor.getIdentificacion());
@@ -42,7 +42,7 @@ public class ProfesorDao {
     }
 
     public void eliminarProfesor(Profesor profesor) throws SQLException {
-        String query = "DELETE FROM profesor WHERE id = ?";
+        String query = "DELETE FROM profesorHBE WHERE id = ?";
         try (PreparedStatement setDePropiedades = con.prepareStatement(query)) {
             setDePropiedades.setInt(1, profesor.getId());
 
@@ -52,7 +52,7 @@ public class ProfesorDao {
 
     public List<Profesor> obtenerProfesores() throws SQLException{
         List<Profesor> listaProfesores = new ArrayList<>();
-        String query = "SELECT * FROM profesor";
+        String query = "SELECT * FROM profesorHBE";
 
         try (
                 Statement stmt = con.createStatement();

@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class GrupoController {
-    public GrupoDao grupoDao;
+    private GrupoDao grupoDao;
 
     public GrupoController() {
         Connection conn = DatabaseConection.getConnection();

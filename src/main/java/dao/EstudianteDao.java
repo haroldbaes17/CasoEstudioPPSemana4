@@ -14,7 +14,7 @@ public class EstudianteDao {
     }
 
     public void agregarEstudiante(Estudiante estudiante) throws SQLException {
-        String query = "INSERT INTO estudiante (nombre, identificacion, email, fecha_nacimiento, estado) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO estudianteHBE (nombre, identificacion, email, fecha_nacimiento, estado) VALUES (?, ?, ?, ?, ?)";
 //        "INSERT INTO usuarios (nombre, contrasenna, rol) VALUES (?, ?, ?)";?
         try (PreparedStatement setDePropiedades = con.prepareStatement(query)) {
             setDePropiedades.setString(1, estudiante.getNombre());
@@ -28,7 +28,7 @@ public class EstudianteDao {
     }
 
     public void modificarEstudiante(Estudiante estudiante) throws SQLException {
-        String query = "UPDATE estudiante SET nombre = ?, identificacion = ?, email = ?, fecha_nacimiento = ?, estado = ? WHERE id = ?";
+        String query = "UPDATE estudianteHBE SET nombre = ?, identificacion = ?, email = ?, fecha_nacimiento = ?, estado = ? WHERE id = ?";
         try (PreparedStatement setDePropiedades = con.prepareStatement(query)) {
             setDePropiedades.setString(1, estudiante.getNombre());
             setDePropiedades.setString(2, estudiante.getIdentificacion());
@@ -42,7 +42,7 @@ public class EstudianteDao {
     }
 
     public void eliminarEstudiante(Estudiante estudiante) throws SQLException {
-        String query = "DELETE FROM estudiante WHERE id = ?";
+        String query = "DELETE FROM estudianteHBE WHERE id = ?";
         try (PreparedStatement setDePropiedades = con.prepareStatement(query)) {
             setDePropiedades.setInt(1, estudiante.getId());
 
@@ -52,7 +52,7 @@ public class EstudianteDao {
 
     public List<Estudiante> obtenerEstudiantes() throws SQLException{
         List<Estudiante> listaEstudiantes = new ArrayList<>();
-        String query = "SELECT * FROM estudiante";
+        String query = "SELECT * FROM estudianteHBE";
 
         try (
             Statement stmt = con.createStatement();

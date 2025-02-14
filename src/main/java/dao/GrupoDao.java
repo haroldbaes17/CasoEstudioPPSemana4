@@ -14,7 +14,7 @@ public class GrupoDao {
     }
 
     public void agregarGrupo(Grupo grupo) throws SQLException {
-        String query = "INSERT INTO grupo (nombre, descripcion, estado) VALUES (?, ?, ?)";
+        String query = "INSERT INTO grupoHBE (nombre, descripcion, estado) VALUES (?, ?, ?)";
 
         try (PreparedStatement setDePropiedades = con.prepareStatement(query)) {
             setDePropiedades.setString(1, grupo.getNombre());
@@ -26,7 +26,7 @@ public class GrupoDao {
     }
 
     public void modificarGrupo(Grupo grupo) throws SQLException {
-        String query = "UPDATE grupo SET nombre = ?, descripcion = ?, estado = ? WHERE id = ?";
+        String query = "UPDATE grupoHBE SET nombre = ?, descripcion = ?, estado = ? WHERE id = ?";
         try (PreparedStatement setDePropiedades = con.prepareStatement(query)) {
             setDePropiedades.setString(1, grupo.getNombre());
             setDePropiedades.setString(2, grupo.getDescripcion());
@@ -38,7 +38,7 @@ public class GrupoDao {
     }
 
     public void eliminarGrupo(Grupo grupo) throws SQLException {
-        String query = "DELETE FROM grupo WHERE id = ?";
+        String query = "DELETE FROM grupoHBE WHERE id = ?";
         try (PreparedStatement setDePropiedades = con.prepareStatement(query)) {
             setDePropiedades.setInt(1, grupo.getId());
 
@@ -48,7 +48,7 @@ public class GrupoDao {
 
     public List<Grupo> obtenerGrupos() throws SQLException{
         List<Grupo> listaGrupos = new ArrayList<>();
-        String query = "SELECT * FROM grupo";
+        String query = "SELECT * FROM grupoHBE";
 
         try (
                 Statement stmt = con.createStatement();

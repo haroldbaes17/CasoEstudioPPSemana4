@@ -16,7 +16,7 @@ public class CursoDao {
     }
 
     public void agregarCurso(Curso curso) throws SQLException {
-        String query = "INSERT INTO curso (nombre, descripcion, estado) VALUES (?, ?, ?)";
+        String query = "INSERT INTO cursoHBE (nombre, descripcion, estado) VALUES (?, ?, ?)";
 
         try (PreparedStatement setDePropiedades = con.prepareStatement(query)) {
             setDePropiedades.setString(1, curso.getNombre());
@@ -28,7 +28,7 @@ public class CursoDao {
     }
 
     public void modificarCurso(Curso curso) throws SQLException {
-        String query = "UPDATE curso SET nombre = ?, descripcion = ?, estado = ? WHERE id = ?";
+        String query = "UPDATE cursoHBE SET nombre = ?, descripcion = ?, estado = ? WHERE id = ?";
         try (PreparedStatement setDePropiedades = con.prepareStatement(query)) {
             setDePropiedades.setString(1, curso.getNombre());
             setDePropiedades.setString(2, curso.getDescripcion());
@@ -40,7 +40,7 @@ public class CursoDao {
     }
 
     public void eliminarCurso(Curso curso) throws SQLException {
-        String query = "DELETE FROM curso WHERE id = ?";
+        String query = "DELETE FROM cursoHBE WHERE id = ?";
         try (PreparedStatement setDePropiedades = con.prepareStatement(query)) {
             setDePropiedades.setInt(1, curso.getId());
 
@@ -50,7 +50,7 @@ public class CursoDao {
 
     public List<Curso> obtenerCursos() throws SQLException{
         List<Curso> listaCursos = new ArrayList<>();
-        String query = "SELECT * FROM curso";
+        String query = "SELECT * FROM cursoHBE";
 
         try (
                 Statement stmt = con.createStatement();
