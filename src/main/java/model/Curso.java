@@ -44,4 +44,5 @@ public class Curso {
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
+
 }
