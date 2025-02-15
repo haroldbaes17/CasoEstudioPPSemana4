@@ -5,14 +5,10 @@ import controller.EstudianteController;
 import java.util.Scanner;
 
 public class EstudianteView {
-    public EstudianteController controller = new EstudianteController();
+    private EstudianteController controller = new EstudianteController();
     private Scanner scanner = new Scanner(System.in);
 
     public EstudianteView() {}
-
-    public void estudianteMenu(int opcion) {
-
-    }
 
     public void agregarEstudiante() {
         try {
