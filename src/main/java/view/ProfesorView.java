@@ -43,11 +43,25 @@ public class ProfesorView {
             String departamento = scanner.nextLine();
             System.out.print("Ingrese el nuevo estado del profesor (Activo / Inactivo): ");
             String estadoStr = scanner.nextLine();
-            if (estadoStr.equalsIgnoreCase("Activo")) estado = true;
+            if (estadoStr.trim().equalsIgnoreCase("Activo")) estado = true;
 
             controller.modificarProfesor(id, nombre, identificacion, email, departamento, estado);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public void eliminarProfesor() {
+        try {
+            System.out.print("Ingrese el ID del profesor: ");
+            int id = Integer.parseInt(scanner.nextLine());
+            controller.eliminarProfesor(id);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void listarProfesores() {
+        controller.obtenerProfesores();
     }
 }

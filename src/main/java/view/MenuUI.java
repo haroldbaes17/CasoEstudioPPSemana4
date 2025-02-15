@@ -1,6 +1,7 @@
 package view;
 
 import controller.ProfesorController;
+import utils.Helpers;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -16,11 +17,13 @@ public class MenuUI {
 
     public void menu() throws IOException {
         while (true) {
+            System.out.println("=======Menú Principal=======");
             System.out.println("Bienvenido al Menú Principal");
-            System.out.println("¿A qué menú desea ir?");
+            System.out.println("¿A qué menú desea acceder?");
             System.out.println("1. Menú Estudiantes");
             System.out.println("2. Menú Profesores");
             System.out.println("3. Menú Cursos");
+            System.out.println("4. Menú Grupos");
             System.out.println("5. Salir");
             System.out.print("¿Que desea hacer?: ");
             int opcion = Integer.parseInt(sc.nextLine());
@@ -30,8 +33,8 @@ public class MenuUI {
                 case 2 -> menuProfesor();
                 case 3 -> menuCurso();
                 case 4 -> menuGrupo();
-                case 5 -> salir();
-                default -> System.out.println("Opcion no valida");
+                case 5 -> Helpers.salir();
+                default -> System.out.println("Opcion no válida");
             }
         }
     }
@@ -55,8 +58,8 @@ public class MenuUI {
                 case 3 -> estudianteView.eliminarEstudiante();
                 case 4 -> estudianteView.listarEstudiantes();
                 case 5 -> menu();
-                case 6 -> salir();
-                default -> System.out.println("Opcion no valida");
+                case 6 -> Helpers.salir();
+                default -> System.out.println("Opcion no válida");
             }
         }
     }
@@ -75,9 +78,13 @@ public class MenuUI {
             int opcion = Integer.parseInt(sc.nextLine());
 
             switch (opcion) {
+                case 1 -> profesorView.agregarProfesor();
+                case 2 -> profesorView.modificarProfesor();
+                case 3 -> profesorView.eliminarProfesor();
+                case 4 -> profesorView.listarProfesores();
                 case 5 -> menu();
-                case 6 -> salir();
-                default -> System.out.println("Opcion no valida");
+                case 6 -> Helpers.salir();
+                default -> System.out.println("Opcion no válida");
             }
         }
     }
@@ -96,9 +103,13 @@ public class MenuUI {
             int opcion = Integer.parseInt(sc.nextLine());
 
             switch (opcion) {
+                case 1 -> cursoView.agregarCurso();
+                case 2 -> cursoView.modificarCurso();
+                case 3 -> cursoView.eliminarCurso();
+                case 4 -> cursoView.listarCursos();
                 case 5 -> menu();
-                case 6 -> salir();
-                default -> System.out.println("Opcion no valida");
+                case 6 -> Helpers.salir();
+                default -> System.out.println("Opcion no válida");
             }
         }
     }
@@ -117,17 +128,14 @@ public class MenuUI {
             int opcion = Integer.parseInt(sc.nextLine());
 
             switch (opcion) {
+                case 1 -> grupoView.agregarGrupo();
+                case 2 -> grupoView.modificarGrupo();
+                case 3 -> grupoView.eliminarGrupo();
+                case 4 -> grupoView.listarGrupos();
                 case 5 -> menu();
-                case 6 -> salir();
-                default -> System.out.println("Opcion no valida");
+                case 6 -> Helpers.salir();
+                default -> System.out.println("Opcion no válida");
             }
         }
     }
-
-    private void salir() {
-        System.out.println("Saliendo...");
-        System.exit(0);
-    }
-
-
 }

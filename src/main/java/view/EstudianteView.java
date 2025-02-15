@@ -43,7 +43,7 @@ public class EstudianteView {
             String fecha_nacimiento = scanner.nextLine();
             System.out.print("Ingrese el nuevo estado del estudiante (Activo / Inactivo): ");
             String estadoStr = scanner.nextLine();
-            if (estadoStr.equalsIgnoreCase("Activo"))  estado = true;
+            if (estadoStr.trim().equalsIgnoreCase("Activo"))  estado = true;
 
             controller.modificarEstudiante(id, nombre, identificacion, email, fecha_nacimiento, estado);
         } catch (Exception e) {
