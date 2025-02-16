@@ -58,13 +58,18 @@ public class GrupoController {
 
         try {
             List<Grupo> allGrupos = grupoDao.obtenerGrupos();
+            Grupo grupoEncontrado = null;
             for (Grupo item : allGrupos) {
-                if (item.getId() == id) {
-                    grupoDao.eliminarGrupo(item);
-                } else {
-                    System.out.println("Grupo no encontrado");
-                }
+                if (item.getId() == id) grupoEncontrado = item;
             }
+
+            if (grupoEncontrado != null) {
+                grupoDao.eliminarGrupo(grupoEncontrado);
+                System.out.println("Grupo eliminado correctamente");
+            } else {
+                System.err.println("Grupo no encontrado");
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -80,10 +85,14 @@ public class GrupoController {
             List<Grupo> grupoLista = grupoDao.obtenerGrupos();
 
             for (Grupo item : grupoLista) {
-                System.out.println("ID: " + item.getId() + ", Nombre: " + item.getNombre() + ", Descripcion: " + item.getDescripcion() + "Estado: " + (item.isEstado() ? "Activo" : "Inactivo"));
+                System.out.println("ID: " + item.getId() + ", Nombre: " + item.getNombre() + ", Descripcion: " + item.getDescripcion() + ", Estado: " + (item.isEstado() ? "Activo" : "Inactivo"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<Grupo> devolverGrupos() throws SQLException {
+        return grupoDao.obtenerGrupos();
     }
 }

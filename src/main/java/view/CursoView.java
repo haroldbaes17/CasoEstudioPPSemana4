@@ -3,6 +3,8 @@ package view;
 import controller.CursoController;
 import model.Curso;
 
+import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 
 public class CursoView {
@@ -23,21 +25,32 @@ public class CursoView {
         }
     }
 
-    public void modificarCurso() {
+    public void modificarCurso() throws SQLException {
         boolean estado = false;
+        Curso cursoEncontrado = null;
+        List<Curso> listaCursos = controller.devolverCursos();
+
         try {
             System.out.print("Ingrese el ID del curso a modificar: ");
             int id = Integer.parseInt(scanner.nextLine());
 
-            System.out.print("Ingrese el nuevo nombre del curso: ");
-            String nombre = scanner.nextLine();
-            System.out.print("Ingrese la nueva descripcion del curso: ");
-            String descripcion = scanner.nextLine();
-            System.out.print("Ingrese el nuevo estado del curso (Activo / Inactivo): ");
-            String estadoStr = scanner.nextLine();
-            if (estadoStr.trim().equalsIgnoreCase("Activo")) estado = true;
+            for (Curso item : listaCursos) {
+                if (item.getId() == id) cursoEncontrado = item;
+            }
 
-            controller.modificarCurso(id, nombre, descripcion, estado);
+            if (cursoEncontrado != null) {
+                System.out.print("Ingrese el nuevo nombre del curso: ");
+                String nombre = scanner.nextLine();
+                System.out.print("Ingrese la nueva descripcion del curso: ");
+                String descripcion = scanner.nextLine();
+                System.out.print("Ingrese el nuevo estado del curso (Activo / Inactivo): ");
+                String estadoStr = scanner.nextLine();
+                if (estadoStr.trim().equalsIgnoreCase("Activo")) estado = true;
+
+                controller.modificarCurso(id, nombre, descripcion, estado);
+            }else {
+                System.out.println("Curso no encontrado");
+            }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

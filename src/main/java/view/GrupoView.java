@@ -1,7 +1,10 @@
 package view;
 
 import controller.GrupoController;
+import model.Grupo;
 
+import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 
 public class GrupoView {
@@ -22,21 +25,31 @@ public class GrupoView {
         }
     }
 
-    public void modificarGrupo() {
+    public void modificarGrupo() throws SQLException {
         boolean estado = false;
+        Grupo grupoEncontrado = null;
+        List<Grupo> listaGrupos = controller.devolverGrupos();
         try {
             System.out.print("Ingrese el ID del grupo a modificar: ");
             int id = Integer.parseInt(scanner.nextLine());
 
-            System.out.print("Ingrese el nuevo nombre del grupo: ");
-            String nombre = scanner.nextLine();
-            System.out.print("Ingrese la nueva descripcion del grupo: ");
-            String descripcion = scanner.nextLine();
-            System.out.print("Ingrese el nuevo estado del grupo (Activo / Inactivo): ");
-            String estadoStr = scanner.nextLine();
-            if (estadoStr.trim().equalsIgnoreCase("Activo")) estado = true;
+            for (Grupo item : listaGrupos) {
+                if (item.getId() == id) grupoEncontrado = item;
+            }
 
-            controller.modificarGrupo(id, nombre, descripcion, estado);
+            if (grupoEncontrado != null) {
+                System.out.print("Ingrese el nuevo nombre del grupo: ");
+                String nombre = scanner.nextLine();
+                System.out.print("Ingrese la nueva descripcion del grupo: ");
+                String descripcion = scanner.nextLine();
+                System.out.print("Ingrese el nuevo estado del grupo (Activo / Inactivo): ");
+                String estadoStr = scanner.nextLine();
+                if (estadoStr.trim().equalsIgnoreCase("Activo")) estado = true;
+
+                controller.modificarGrupo(id, nombre, descripcion, estado);
+            } else {
+                System.out.println("Curso no encontrado");
+            }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

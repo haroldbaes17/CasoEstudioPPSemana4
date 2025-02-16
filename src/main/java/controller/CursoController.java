@@ -58,13 +58,18 @@ public class CursoController {
 
         try {
             List<Curso> allCursos = cursoDao.obtenerCursos();
+            Curso cursoEncontrado = null;
             for (Curso item : allCursos) {
-                if (item.getId() == id) {
-                    cursoDao.eliminarCurso(item);
-                } else {
-                    System.out.println("Curso no encontrado");
-                }
+                if (item.getId() == id) cursoEncontrado = item;
             }
+
+            if (cursoEncontrado != null) {
+                cursoDao.eliminarCurso(cursoEncontrado);
+                System.out.println("Curso eliminado correctamente");
+            } else {
+                System.out.println("Curso no encontrado");
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -80,10 +85,14 @@ public class CursoController {
             List<Curso> cursoLista = cursoDao.obtenerCursos();
 
             for (Curso item : cursoLista) {
-                System.out.println("ID: " + item.getId() + ", Nombre: " + item.getNombre() + ", Descripcion: " + item.getDescripcion() + "Estado: " + (item.isEstado() ? "Activo" : "Inactivo"));
+                System.out.println("ID: " + item.getId() + ", Nombre: " + item.getNombre() + ", Descripcion: " + item.getDescripcion() + ", Estado: " + (item.isEstado() ? "Activo" : "Inactivo"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<Curso> devolverCursos() throws SQLException {
+        return cursoDao.obtenerCursos();
     }
 }

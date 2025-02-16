@@ -58,18 +58,21 @@ public class ProfesorController {
         }
         try {
             List<Profesor> allProfesores = profesorDao.obtenerProfesores();
+            Profesor profesorEncontrado = null;
             for (Profesor item : allProfesores) {
-                if (id == item.getId()) {
-                    profesorDao.eliminarProfesor(item);
-                } else {
-                    System.err.println("Profesor no encontrado");
-                }
+                if (id == item.getId()) profesorEncontrado = item;
             }
+
+            if (profesorEncontrado != null) {
+                profesorDao.eliminarProfesor(profesorEncontrado);
+                System.out.println("Profesor eliminado exitosamente");
+            } else {
+                System.out.println("Profesor no encontrado");
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
     }
 
     public void obtenerProfesores() {
@@ -87,5 +90,10 @@ public class ProfesorController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<Profesor> devolverProfesores() throws SQLException {
+
+        return profesorDao.obtenerProfesores();
     }
 }

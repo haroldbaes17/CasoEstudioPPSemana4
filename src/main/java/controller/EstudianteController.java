@@ -4,6 +4,7 @@ import dao.EstudianteDao;
 import model.DatabaseConection;
 import model.Estudiante;
 
+import javax.naming.spi.DirObjectFactory;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -58,13 +59,18 @@ public class EstudianteController {
         }
         try {
             List<Estudiante> allEstudiantes = estudianteDao.obtenerEstudiantes();
+            Estudiante estudianteEncontrado = null;
             for (Estudiante item : allEstudiantes) {
-                if (id == item.getId()) {
-                    estudianteDao.eliminarEstudiante(item);
-                } else {
-                    System.err.println("Estudiante no encontrado");
-                }
+                if (id == item.getId()) estudianteEncontrado = item;
             }
+
+            if (estudianteEncontrado != null) {
+                estudianteDao.eliminarEstudiante(estudianteEncontrado);
+                System.out.println("Estudiante eliminado exitosamente");
+            } else {
+                System.out.println("Estudiante no encontrado");
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -87,5 +93,9 @@ public class EstudianteController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<Estudiante> devolverEstudiantes () throws SQLException {
+        return estudianteDao.obtenerEstudiantes();
     }
 }
