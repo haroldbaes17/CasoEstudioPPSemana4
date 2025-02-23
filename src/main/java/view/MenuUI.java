@@ -15,6 +15,7 @@ public class MenuUI {
 
     public MenuUI() {}
 
+    //Metodo de menu
     public void menu() throws IOException {
         while (true) {
             try {
