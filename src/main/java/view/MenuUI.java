@@ -12,6 +12,7 @@ public class MenuUI {
     private ProfesorView profesorView = new ProfesorView();
     private CursoView cursoView = new CursoView();
     private GrupoView grupoView = new GrupoView();
+    private GrupoCursoView grupoCursoView = new GrupoCursoView();
 
     public MenuUI() {}
 
@@ -26,7 +27,8 @@ public class MenuUI {
                 System.out.println("2. Menú Profesores");
                 System.out.println("3. Menú Cursos");
                 System.out.println("4. Menú Grupos");
-                System.out.println("5. Salir");
+                System.out.println("5. Menú Grupo Curso");
+                System.out.println("6. Salir");
                 System.out.print("¿Que desea hacer?: ");
                 int opcion = Integer.parseInt(sc.nextLine());
 
@@ -35,7 +37,8 @@ public class MenuUI {
                     case 2 -> menuProfesor();
                     case 3 -> menuCurso();
                     case 4 -> menuGrupo();
-                    case 5 -> Helpers.salir();
+                    case 5 -> menuGrupoCurso();
+                    case 6 -> Helpers.salir();
                     default -> System.out.println("Opcion no válida");
                 }
             } catch (NumberFormatException e) {
@@ -169,4 +172,36 @@ public class MenuUI {
             }
         }
     }
+
+    public void menuGrupoCurso() throws IOException {
+        while (true) {
+            try {
+                System.out.println("=======Menú Grupo Curso=======");
+                System.out.println("Bienvenido al Menú de Grupos Curso");
+                System.out.println("1. Ingresar nueva relación");
+                System.out.println("2. Modificar relación");
+                System.out.println("3. Eliminar relación");
+                System.out.println("4. Obtener relaciones");
+                System.out.println("5. Regresar");
+                System.out.println("6. Salir");
+                System.out.print("¿Que desea hacer?: ");
+                int opcion = Integer.parseInt(sc.nextLine());
+
+                switch (opcion) {
+                    case 1 -> grupoCursoView.agregarRelacion();
+                    case 2 -> grupoCursoView.modificarRelacion();
+                    case 3 -> grupoCursoView.eliminarRelacion();
+                    case 4 -> grupoCursoView.listarRelacion();
+                    case 5 -> menu();
+                    case 6 -> Helpers.salir();
+                    default -> System.out.println("Opcion no válida");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Ingrese un numero valido");
+            } catch (Exception ex){
+                System.out.println(ex.getMessage());
+            }
+        }
+    }
+
 }

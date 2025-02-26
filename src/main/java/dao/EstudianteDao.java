@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EstudianteDao {
-    private Connection con;
+    private final Connection con;
 
     public EstudianteDao(Connection con) {
         this.con = con;
